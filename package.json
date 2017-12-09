@@ -1,0 +1,28 @@
+{
+    "name": "centralio",
+    "version": "0.0.2",
+    "license": "MIT",
+    "author": {
+        "name": "Francesco Bianco",
+        "email": "bianco@javanile.org"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/javanile/centralio.git"
+    },
+    "main": "src/centralio.js",
+    "scripts": {
+        "test": "mocha --reporter spec --recursive | sed '/^\\s*$/d'",
+        "coverage": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --recursive",
+        "info": "echo 'developed by Francesco Bianco'"
+    },
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "chai-fs": "^1.0.0",
+        "colors": "^1.1.2",
+        "mocha": "^3.2.0"
+    },
+    "dependencies": {
+        "colors": "^1.1.2"
+    }
+}
