@@ -8,6 +8,8 @@ $ npm install centralio
 
 ## Your first server
 ```javascript
+// file: server.js
+// exec: node server
 const server = require('centralio').server();
 
 // Start your server 
@@ -23,6 +25,8 @@ server.rx(function(client, msg) {
 
 ## Your first client
 ```javascript
+// file: client.js
+// exec: node client
 const client = require('centralio').client();
 
 // Start your client
