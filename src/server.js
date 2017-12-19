@@ -37,9 +37,9 @@ module.exports = class server {
             }
 
             //
-            if (typeof this.callbacks[client.status] !== 'undefined') {
-                for (var i in this.callbacks[client.status]) {
-                    var callback = this.callbacks[client.status][i];
+            if (typeof this.callbacks[client.state] !== 'undefined') {
+                for (var i in this.callbacks[client.state]) {
+                    var callback = this.callbacks[client.state][i];
                     callback(client, msg.toString());
                 }
             }
@@ -61,15 +61,15 @@ module.exports = class server {
     /**
      *
      */
-    rx(status, callback) {
-        if (typeof status === 'function' && typeof callback === 'undefined') {
-            callback = status;
-            status = '*';
+    rx(state, callback) {
+        if (typeof state === 'function' && typeof callback === 'undefined') {
+            callback = state;
+            state = '*';
         }
-        if (typeof this.callbacks[status] === 'undefined') {
-            this.callbacks[status] = [];
+        if (typeof this.callbacks[state] === 'undefined') {
+            this.callbacks[state] = [];
         }
-        this.callbacks[status].push(callback);
+        this.callbacks[state].push(callback);
     }
 
     /**
@@ -80,7 +80,7 @@ module.exports = class server {
     register(client) {
         client.id = md5(client.address + ':' + client.port);
         if (typeof this.clients[client.id] === 'undefined') {
-            client.status = 'connect';
+            client.state = 'connect';
             client.tx = (data, callback) => {
                 this.server.send(data, 0, data.length, client.port, client.host, (err) => {
                     if (err) {

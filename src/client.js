@@ -9,7 +9,7 @@ module.exports = class client {
     constructor() {
         this.client = dgram.createSocket('udp4');
         this.callbacks = {};
-        this.status = 'connect';
+        this.state = 'connect';
 
         //
         this.client.on('message', (msg, info) => {
@@ -19,9 +19,9 @@ module.exports = class client {
                     callback(msg.toString());
                 }
             }
-            if (typeof this.callbacks[this.status] !== 'undefined') {
-                for (var i in this.callbacks[this.status]) {
-                    var callback = this.callbacks[this.status][i];
+            if (typeof this.callbacks[this.state] !== 'undefined') {
+                for (var i in this.callbacks[this.state]) {
+                    var callback = this.callbacks[this.state][i];
                     callback(msg.toString());
                 }
             }
@@ -56,14 +56,14 @@ module.exports = class client {
     /**
      *
      */
-    rx(status, callback) {
-        if (typeof status === 'function' && typeof callback === 'undefined') {
-            callback = status;
-            status = '*';
+    rx(state, callback) {
+        if (typeof state === 'function' && typeof callback === 'undefined') {
+            callback = state;
+            state = '*';
         }
-        if (typeof this.callbacks[status] === 'undefined') {
-            this.callbacks[status] = [];
+        if (typeof this.callbacks[state] === 'undefined') {
+            this.callbacks[state] = [];
         }
-        this.callbacks[status].push(callback);
+        this.callbacks[state].push(callback);
     }
 };
