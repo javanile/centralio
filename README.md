@@ -6,7 +6,7 @@ If you want use Centralio simply add dependency into your project
 $ npm install centralio
 ```
 
-## Your first server
+### Your first server
 ```javascript
 // file: server.js
 // exec: node server
@@ -23,7 +23,7 @@ server.rx(function(client, msg) {
 });
 ```
 
-## Your first client
+### Your first client
 ```javascript
 // file: client.js
 // exec: node client
