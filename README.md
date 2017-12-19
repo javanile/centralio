@@ -40,3 +40,6 @@ client.rx(function(msg) {
 // Send message to server
 client.tx('Hi my server!');
 ```
+
+## Manage client state
+
