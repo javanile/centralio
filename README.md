@@ -1,7 +1,5 @@
 # Centralio
 
-![Centralio Client/Server sample architecture](http://www.plantuml.com/plantuml/png/ROyn2uCm48Nt_8h3tS74GWsbIrsw5Ketbv3SbO2S46FpzqjZ5H7Nzpw-TyU3GoYU63uOuDK-Ehxr7Zb2fS4Ep6ZZ6aaD0r7l6TT8QKZ6Hy_l0im8O_O8mTcwc3g-jnhgvZmHraq6RQwg7IbdKfARY19jIBaZrTyP4fdHdJQa4cA-0YvbULs6GF-UgmygUP0fyGK0)
-
 ## Get Starded
 If you want use Centralio simply add dependency into your project
 ```
@@ -44,4 +42,4 @@ client.tx('Hi my server!');
 ```
 
 ## Manage client state
-
+![Centralio Client/Server sample architecture](http://www.plantuml.com/plantuml/png/ROyn2uCm48Nt_8h3tS74GWsbIrsw5Ketbv3SbO2S46FpzqjZ5H7Nzpw-TyU3GoYU63uOuDK-Ehxr7Zb2fS4Ep6ZZ6aaD0r7l6TT8QKZ6Hy_l0im8O_O8mTcwc3g-jnhgvZmHraq6RQwg7IbdKfARY19jIBaZrTyP4fdHdJQa4cA-0YvbULs6GF-UgmygUP0fyGK0)
