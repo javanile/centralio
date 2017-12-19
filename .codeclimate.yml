@@ -1,4 +1,4 @@
-engines:
+plugins:
   duplication:
     enabled: true
     config:
@@ -6,9 +6,15 @@ engines:
       - javascript
   eslint:
     enabled: true
+    config:
+      config: .eslintrc
   fixme:
     enabled: true
 
 ratings:
   paths:
   - "**.js"
+
+exclude_paths:
+- node_modules/**/*
+- test/**/*
