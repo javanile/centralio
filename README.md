@@ -7,7 +7,7 @@ Centralio is a library for creating applications with many clients and a central
 
 ## Get Starded
 If you want use Centralio simply add dependency into your project
-```
+```bash
 $ npm install centralio
 ```
 
