@@ -17,7 +17,7 @@ server.start('127.0.0.1', '44044');
 server.rx(function(client, msg) {
   console.log('Message from client:', client.id, msg);  
   // Respond to client
-  client.tx('Thanks from your access.');
+  client.tx('Thanks from your message.');
 });
 ```
 
