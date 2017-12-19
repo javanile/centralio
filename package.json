@@ -1,6 +1,6 @@
 {
     "name": "centralio",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "license": "MIT",
     "author": {
         "name": "Francesco Bianco",
@@ -23,6 +23,7 @@
         "mocha": "^3.2.0"
     },
     "dependencies": {
-        "colors": "^1.1.2"
+        "colors": "^1.1.2",
+        "md5": "^2.2.1"
     }
 }

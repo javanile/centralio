@@ -1,5 +1,6 @@
 
-const dgram = require('dgram');
+const dgram = require('dgram'),
+      md5 = require('md5');
 
 module.exports = class server {
 
@@ -10,69 +11,77 @@ module.exports = class server {
         this.clients = {};
         this.callbacks = {};
         this.server = dgram.createSocket('udp4');
+
+        //
         this.server.on('error', (err) => {
             console.log(`server error:\n${err.stack}`);
             this.server.close();
         });
+
+        //
         this.server.on('listening', () => {
             var address = this.server.address();
-            console.log(`server listening ${address.address}:${address.port}`);
+            //console.log(`server listening ${address.address}:${address.port}`);
         });
+
+        //
         this.server.on('message', (msg, info) => {
-            var client = this.register(info);
-            var status = client.status;
+            let client = this.register(info);
 
-            console.log('>', client.id, msg+"");
-
-            if (typeof this.callbacks[status] == "undefined") { return; }
-
-            for (var i in this.callbacks[status]) {
-                var callback = this.callbacks[status][i];
-                callback(client, msg.toString());
+            //
+            if (typeof this.callbacks['*'] !== 'undefined') {
+                for (var i in this.callbacks['*']) {
+                    var callback = this.callbacks['*'][i];
+                    callback(client, msg.toString());
+                }
             }
-            return this;
-            //clients[JSON.stringify([rinfo.address, rinfo.port])] = true;
-            //use delete clients[client] to remove from the list of clients
+
+            //
+            if (typeof this.callbacks[client.status] !== 'undefined') {
+                for (var i in this.callbacks[client.status]) {
+                    var callback = this.callbacks[client.status][i];
+                    callback(client, msg.toString());
+                }
+            }
         });
-
-        /*
-        function broadCastNew() {
-            var message = new Buffer(news[Math.floor(Math.random() * news.length)]);
-
-            for (var client in clients) {
-                client = JSON.parse(client);
-                var port = client[1];
-                var address = client[0];
-                server.send(message, 0, message.length, port, address);
-            }
-
-            console.log("Sent " + message + " to the wire...");
-        }
-        */
     }
 
     /**
      *
      */
-    start(port) {
+    start(host, port) {
+        if (typeof port === 'undefined') {
+            port = host;
+            host = '127.0.0.1';
+        }
         this.server.bind(port);
+        return this;
     }
 
     /**
      *
      */
     rx(status, callback) {
+        if (typeof status === 'function' && typeof callback === 'undefined') {
+            callback = status;
+            status = '*';
+        }
         if (typeof this.callbacks[status] === 'undefined') {
             this.callbacks[status] = [];
         }
         this.callbacks[status].push(callback);
     }
 
+    /**
+     *
+     * @param client
+     * @returns {*}
+     */
     register(client) {
-        client.id = client.address + ':' + client.port;
+        client.id = md5(client.address + ':' + client.port);
         if (typeof this.clients[client.id] === 'undefined') {
             client.status = 'connect';
-            client.tx = (data) => {
+            client.tx = (data, callback) => {
                 this.server.send(data, 0, data.length, client.port, client.host, (err) => {
                     if (err) {
                         console.log('respond to client error', err);
