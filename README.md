@@ -1,6 +1,9 @@
 # Centralio
 Centralio is a library for creating applications with many clients and a central server based on the UDP protocol.
 
+[![Build Status](https://travis-ci.org/javanile-bot/centralio.svg?branch=master)](https://travis-ci.org/javanile-bot/centralio)
+
+
 ## Get Starded
 If you want use Centralio simply add dependency into your project
 ```
