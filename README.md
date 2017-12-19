@@ -1,4 +1,5 @@
 # Centralio
+Centralio is a library for creating applications with many clients and a central server based on the UDP protocol.
 
 ## Get Starded
 If you want use Centralio simply add dependency into your project
