@@ -6,7 +6,7 @@ npm install centralio
 ```
 
 ## Your first server
-```
+```javascript
 const server = require('centralio').server();
 
 server.start('127.0.0.1', '44044');
@@ -18,7 +18,7 @@ server.rx('connect', (client, msg) => {
 ```
 
 ## Your first client
-```
+```javascript
 const client = require('centralio').client();
 
 client.start('127.0.0.1', '44044');
