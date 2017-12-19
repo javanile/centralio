@@ -1,6 +1,8 @@
 {
   "env": {
-    "node": true
+    "browser": false,
+    "node": true,
+    "es6": true
   },
   "rules": {
     "brace-style": [2, "1tbs", { "allowSingleLine": true }],
@@ -25,5 +27,14 @@
     "Spinner": true,
     "Timer": true,
     "moment": true
-  }
+  },
+  "require-jsdoc": ["error", {
+    "require": {
+      "FunctionDeclaration": true,
+      "MethodDefinition": true,
+      "ClassDeclaration": false,
+      "ArrowFunctionExpression": false,
+      "FunctionExpression": false
+    }
+  }]
 }
