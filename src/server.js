@@ -31,7 +31,7 @@ module.exports = class server {
 
         //
         this.server.on('message', (msg, info) => {
-            let client = this.register(info);
+            var client = this.registerClient(info);
 
             //
             if (typeof this.callbacks['*'] !== 'undefined') {
@@ -82,7 +82,7 @@ module.exports = class server {
      * @param client
      * @returns {*}
      */
-    register(client) {
+    registerClient(client) {
         client.id = md5(client.address + ':' + client.port);
 
         if (typeof this.clients[client.id] === 'undefined') {
