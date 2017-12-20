@@ -1,4 +1,8 @@
-
+/*!
+ * Centralio
+ * Copyright(c) 2016-2017 Javanile.org
+ * MIT Licensed
+ */
 
 module.exports = {
     registerStateCallback: function (stack, state, callback) {

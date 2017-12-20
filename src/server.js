@@ -1,5 +1,7 @@
 /*!
- *
+ * Centralio
+ * Copyright(c) 2016-2017 Javanile.org
+ * MIT Licensed
  */
 
 const md5 = require('md5');
