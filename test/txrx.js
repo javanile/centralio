@@ -18,6 +18,8 @@ describe('Testing TX/RX:', function () {
 
         client.rx(function(msg) {
             chai.assert.match(msg, /welcome/);
+            server.close();
+            client.close();
             done();
         });
 

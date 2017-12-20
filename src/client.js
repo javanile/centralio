@@ -1,5 +1,8 @@
 
+// language=ECMAScript 6
+
 const dgram = require('dgram');
+const utility = require('./utility');
 
 module.exports = class client {
 
@@ -40,6 +43,13 @@ module.exports = class client {
     /**
      *
      */
+    close() {
+        this.client.close();
+    }
+
+    /**
+     *
+     */
     tx(msg, callback) {
         this.client.send(
             msg,
@@ -57,13 +67,6 @@ module.exports = class client {
      *
      */
     rx(state, callback) {
-        if (typeof state === 'function' && typeof callback === 'undefined') {
-            callback = state;
-            state = '*';
-        }
-        if (typeof this.callbacks[state] === 'undefined') {
-            this.callbacks[state] = [];
-        }
-        this.callbacks[state].push(callback);
+        utility.registerStateCallback(this.callbacks, state, callback);
     }
 };

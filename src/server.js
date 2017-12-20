@@ -1,6 +1,10 @@
+/*!
+ *
+ */
 
-const dgram = require('dgram'),
-      md5 = require('md5');
+const md5 = require('md5');
+const dgram = require('dgram');
+const utility = require('./utility');
 
 module.exports = class server {
 
@@ -14,8 +18,7 @@ module.exports = class server {
 
         //
         this.server.on('error', (err) => {
-            console.log(`server error:\n${err.stack}`);
-            this.server.close();
+            console.log('Centralio (ERROR):', err);
         });
 
         //
@@ -61,15 +64,15 @@ module.exports = class server {
     /**
      *
      */
+    close() {
+        this.server.close();
+    }
+
+    /**
+     *
+     */
     rx(state, callback) {
-        if (typeof state === 'function' && typeof callback === 'undefined') {
-            callback = state;
-            state = '*';
-        }
-        if (typeof this.callbacks[state] === 'undefined') {
-            this.callbacks[state] = [];
-        }
-        this.callbacks[state].push(callback);
+        utility.registerStateCallback(this.callbacks, state, callback);
     }
 
     /**
@@ -79,8 +82,10 @@ module.exports = class server {
      */
     register(client) {
         client.id = md5(client.address + ':' + client.port);
+
         if (typeof this.clients[client.id] === 'undefined') {
             client.state = 'connect';
+            client.newly = true;
             client.tx = (data, callback) => {
                 this.server.send(data, 0, data.length, client.port, client.host, (err) => {
                     if (err) {
@@ -90,6 +95,7 @@ module.exports = class server {
             }
             this.clients[client.id] = client;
         }
+
         return this.clients[client.id];
     }
-};
+}
